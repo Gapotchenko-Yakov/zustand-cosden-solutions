@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { useCounterStore } from "./store";
+
+function logCount() {
+  const count = useCounterStore.getState().count;
+  console.log(count);
+}
 
 function App() {
   const count = useCounterStore((state) => state.count);
@@ -12,6 +17,10 @@ const OtherComponent = (props: { count: number }) => {
   const increment = useCounterStore((state) => state.increment);
   const incrementAsync = useCounterStore((state) => state.incrementAsync);
   const decrement = useCounterStore((state) => state.decrement);
+
+  useEffect(() => {
+    logCount();
+  }, []);
 
   return (
     <div>
